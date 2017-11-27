@@ -14,7 +14,6 @@
         self.statusLabel.text = [NSString stringWithFormat:@"%ld",status];
     }];
     
-    //代理
     - (void)lfSocketReadData:(id)data DataType:(LFSocketReadDataType)dataType
     {
         NSLog(@"--%@",data);

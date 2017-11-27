@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "LFIMClient.h"
-
+#import "LFSocketDataDeCode.h"
 @interface ViewController ()<LFSocketDelegate>
 
 
@@ -25,7 +25,7 @@
     
     
     LFSocketConfig *config = [[LFSocketConfig alloc] init];
-    config.host = your ip;
+    config.host = @"your ip";
     config.port = your port;
 
     LFIMClient *im = [LFIMClient shareInstance];
@@ -46,7 +46,7 @@
       [self.im disConnectServer];
 }
 #pragma mark - delegate
-- (void)lfSocketReadData:(id)data DataType:(LFSocketReadDataType)dataType
+- (void)LFSocketReadData:(id)data DataType:(LFSocketReadDataType)dataType
 {
     NSLog(@"--%@",data);
 }

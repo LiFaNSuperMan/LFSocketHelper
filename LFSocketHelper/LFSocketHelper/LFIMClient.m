@@ -8,7 +8,7 @@
 
 #import "LFIMClient.h"
 #import "LFSendMsgHelper.h"
-
+#import "NSString+GetFullString.h"
 
 @interface LFIMClient()<GCDAsyncSocketDelegate>
 
@@ -77,6 +77,9 @@
     if (!self.serviceStatus) {
         NSError *error=nil;
         [self.socket connectToHost:self.config.host onPort:self.config.port error:&error];
+        if (error) {
+            NSLog(@"--%@",error);
+        }
     }
 }
 -(void)disConnectServer{
@@ -146,24 +149,20 @@
 - (void)configData:(NSData *)data{
     
     // 此处做半包粘包判断 以及心跳包过滤
-    
-    //    if (self.onMessageResponseBlock && aStr != nil && aStr != NULL && ![aStr isEqualToString:@"Service-Ping"]) {
-    //        self.onMessageResponseBlock(aStr);
-    //    }
-    
     switch (self.dataType) {
         case LFSocketReadDataTypeData:
             {
-                if ([self.delegate respondsToSelector:@selector(lfSocketReadData:DataType:)]) {
-                    [self.delegate lfSocketReadData:data DataType:LFSocketReadDataTypeData];
+                if ([self.delegate respondsToSelector:@selector(LFSocketReadData:DataType:)]) {
+                    [self.delegate LFSocketReadData:data DataType:LFSocketReadDataTypeData];
                 }
             }
             break;
         case LFSocketReadDataTypeString:
         {
             NSString* aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            if ([self.delegate respondsToSelector:@selector(lfSocketReadData:DataType:)]) {
-                [self.delegate lfSocketReadData:aStr DataType:LFSocketReadDataTypeString];
+            NSArray *dataArray = [aStr toArrayOrNSDictionary];
+            if ([self.delegate respondsToSelector:@selector(LFSocketReadData:DataType:)]) {
+                [self.delegate LFSocketReadData:dataArray DataType:LFSocketReadDataTypeString];
             }
         }
             break;
@@ -177,10 +176,7 @@
 }
 - (void)sendTimerAction
 {
-//     发送心跳包
-    char charSend_SetStart[] = {0xAA,0x75,0xA4,0x00,0x00,0x61,0x62,0x63,0x64,0x71,0x77,0x65,0x64,0x69,0x73,0x64,0x64,0x64,0x6C,0x64,0x0D,0xDD,0x02};
-    NSData *sendData = [NSData dataWithBytes:charSend_SetStart length:sizeof(charSend_SetStart)];
-    [self sendData:sendData];
+    [self sendData:[LFSendMsgHelper phoneHeartbeat]];
 }
 // 乒乓检测
 - (void)checkTimerAction

@@ -9,6 +9,7 @@
 #import "LFSendMsgHelper.h"
 #import "AppDelegate.h"
 
+#import "LFSocketDataDeCode.h"
 
 
 @implementation LFSendMsgHelper
@@ -20,7 +21,7 @@ static Byte orderNum = -1;
 + (NSData *)phoneSendLoginIn{
     
     NSMutableData *finallyData = [[NSMutableData alloc] init];
-    char header[] = {0xAA,0x75,0xA4,0x00};
+    char header[] = {0xAA,0x75,0xA4,0x00,0x00};
     [finallyData appendBytes:header length:sizeof(header)];
     
     NSString *string = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -45,6 +46,9 @@ static Byte orderNum = -1;
     NSData *endData = [NSData dataWithBytes:&end length:sizeof(end)];
     [finallyData appendData:endData];
 
+    char tailed[] = {0xAA,0x75};
+    [finallyData appendBytes:tailed length:sizeof(tailed)];
+
     return finallyData;
 }
 
@@ -68,6 +72,38 @@ static Byte orderNum = -1;
 + (NSData *)phoneAckAudio{
     NSMutableData *data = [[NSMutableData alloc] init];
     return data;
+}
++ (NSData *)phoneHeartbeat{
+    NSMutableData *finallyData = [[NSMutableData alloc] init];
+    char header[] = {0xAA,0x75,0xA5,0x00,0x00};
+    [finallyData appendBytes:header length:sizeof(header)];
+    
+    NSString *string = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    string = [[string stringByReplacingOccurrencesOfString:@"-" withString:@""] uppercaseString];
+    NSData *uuidData = [self convertHexStrToData:string];
+    [finallyData appendData:uuidData];
+    
+    
+    orderNum++;
+    if (orderNum > 127) { orderNum = 0;}
+    
+    NSData *numData = [NSData dataWithBytes:&orderNum length:sizeof(orderNum)];
+    [finallyData appendData:numData];
+    
+    // 异或值
+    Byte *sourceDataPoint = (Byte *)[finallyData bytes];
+    Byte end = '\0';
+    
+    for (int i = 0 ; i < finallyData.length; i ++) {
+        end = sourceDataPoint[i] ^ end;
+    }
+    NSData *endData = [NSData dataWithBytes:&end length:sizeof(end)];
+    [finallyData appendData:endData];
+    
+    char tailed[] = {0xAA,0x75};
+    [finallyData appendBytes:tailed length:sizeof(tailed)];
+    
+    return finallyData;
 }
 #pragma mark - private
 

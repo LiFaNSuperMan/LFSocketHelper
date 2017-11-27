@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AB21A3E11FCBA74600601491 /* NSString+GetFullString.m in Sources */ = {isa = PBXBuildFile; fileRef = AB21A3E01FCBA74600601491 /* NSString+GetFullString.m */; };
-		AB21A3E41FCBA75E00601491 /* NSData+GetFullData.m in Sources */ = {isa = PBXBuildFile; fileRef = AB21A3E31FCBA75E00601491 /* NSData+GetFullData.m */; };
 		AB21A3FA1FCBBF8200601491 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AB21A3F71FCBBF8200601491 /* GCDAsyncSocket.m */; };
 		AB21A3FB1FCBBF8200601491 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AB21A3F91FCBBF8200601491 /* GCDAsyncUdpSocket.m */; };
+		ABB2A3CA1FCBF14500F6D75C /* LFSocketDataDeCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB2A3C91FCBF14500F6D75C /* LFSocketDataDeCode.m */; };
 		ABC1A9861FC7FA7600BA4865 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC1A9851FC7FA7600BA4865 /* AppDelegate.m */; };
 		ABC1A9891FC7FA7600BA4865 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC1A9881FC7FA7600BA4865 /* ViewController.m */; };
 		ABC1A98C1FC7FA7600BA4865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC1A98A1FC7FA7600BA4865 /* Main.storyboard */; };
@@ -50,12 +50,12 @@
 		8671DF2B9BC3691DDFD61C08 /* Pods-LFSocketHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFSocketHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFSocketHelper/Pods-LFSocketHelper.release.xcconfig"; sourceTree = "<group>"; };
 		AB21A3DF1FCBA74600601491 /* NSString+GetFullString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+GetFullString.h"; sourceTree = "<group>"; };
 		AB21A3E01FCBA74600601491 /* NSString+GetFullString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+GetFullString.m"; sourceTree = "<group>"; };
-		AB21A3E21FCBA75E00601491 /* NSData+GetFullData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+GetFullData.h"; sourceTree = "<group>"; };
-		AB21A3E31FCBA75E00601491 /* NSData+GetFullData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+GetFullData.m"; sourceTree = "<group>"; };
 		AB21A3F61FCBBF8200601491 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		AB21A3F71FCBBF8200601491 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		AB21A3F81FCBBF8200601491 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		AB21A3F91FCBBF8200601491 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		ABB2A3C81FCBF14500F6D75C /* LFSocketDataDeCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSocketDataDeCode.h; sourceTree = "<group>"; };
+		ABB2A3C91FCBF14500F6D75C /* LFSocketDataDeCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFSocketDataDeCode.m; sourceTree = "<group>"; };
 		ABC1A9811FC7FA7600BA4865 /* LFSocketHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LFSocketHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC1A9841FC7FA7600BA4865 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ABC1A9851FC7FA7600BA4865 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -201,10 +201,10 @@
 				ABC1A9C31FC8222F00BA4865 /* LFSocketConfig.m */,
 				ABC1A9C51FC824D800BA4865 /* LFSendMsgHelper.h */,
 				ABC1A9C61FC824D800BA4865 /* LFSendMsgHelper.m */,
+				ABB2A3C81FCBF14500F6D75C /* LFSocketDataDeCode.h */,
+				ABB2A3C91FCBF14500F6D75C /* LFSocketDataDeCode.m */,
 				AB21A3DF1FCBA74600601491 /* NSString+GetFullString.h */,
 				AB21A3E01FCBA74600601491 /* NSString+GetFullString.m */,
-				AB21A3E21FCBA75E00601491 /* NSData+GetFullData.h */,
-				AB21A3E31FCBA75E00601491 /* NSData+GetFullData.m */,
 			);
 			path = LFSocketHelper;
 			sourceTree = "<group>";
@@ -410,13 +410,13 @@
 			files = (
 				ABC1A9891FC7FA7600BA4865 /* ViewController.m in Sources */,
 				ABC1A9C41FC8222F00BA4865 /* LFSocketConfig.m in Sources */,
-				AB21A3E41FCBA75E00601491 /* NSData+GetFullData.m in Sources */,
 				ABC1A9941FC7FA7600BA4865 /* main.m in Sources */,
 				ABC1A9C71FC824D800BA4865 /* LFSendMsgHelper.m in Sources */,
 				ABC1A9B91FC7FC3A00BA4865 /* LFIMClient.m in Sources */,
 				AB21A3FB1FCBBF8200601491 /* GCDAsyncUdpSocket.m in Sources */,
 				AB21A3FA1FCBBF8200601491 /* GCDAsyncSocket.m in Sources */,
 				ABC1A9861FC7FA7600BA4865 /* AppDelegate.m in Sources */,
+				ABB2A3CA1FCBF14500F6D75C /* LFSocketDataDeCode.m in Sources */,
 				AB21A3E11FCBA74600601491 /* NSString+GetFullString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

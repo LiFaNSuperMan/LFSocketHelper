@@ -38,7 +38,7 @@ typedef void(^ServiceStatusConnectChangedBlock)(LFSocketConnectStatus status);
  @param data 返回具体数据
  @param dataType 返回数据类型
  */
-- (void)lfSocketReadData:(id)data DataType:(LFSocketReadDataType)dataType;
+- (void)LFSocketReadData:(id)data DataType:(LFSocketReadDataType)dataType;
 
 @end
 

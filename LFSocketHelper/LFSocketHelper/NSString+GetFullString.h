@@ -10,4 +10,6 @@
 
 @interface NSString (GetFullString)
 
+- (id)toArrayOrNSDictionary;
+
 @end

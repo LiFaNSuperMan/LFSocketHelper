@@ -51,6 +51,12 @@
  */
 + (NSData *)phoneAckAudio;
 
+/**
+ 发送心跳包
+
+ @return 设置好data
+ */
++ (NSData *)phoneHeartbeat;
 
 
 @end

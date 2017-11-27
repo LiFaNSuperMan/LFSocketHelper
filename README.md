@@ -4,8 +4,8 @@
 代码如下：
 
     LFSocketConfig *config = [[LFSocketConfig alloc] init];
-    config.host = @"192.168.1.229";
-    config.port = 20066;
+    config.host = your ip;
+    config.port = your port;
 
     LFIMClient *im = [LFIMClient shareInstance];
     im.dataType = LFSocketReadDataTypeData;
@@ -14,7 +14,12 @@
         self.statusLabel.text = [NSString stringWithFormat:@"%ld",status];
     }];
     
+    //代理
+    - (void)lfSocketReadData:(id)data DataType:(LFSocketReadDataType)dataType
+    {
+        NSLog(@"--%@",data);
+    }  
     
-**通过block得到当前连接状态  通过代码得到当前接到消息回调   
-**其余文件对应公司业务需求 可参考  
+通过block得到当前连接状态  通过代码得到当前接到消息回调   
+其余文件对应公司业务需求 可参考  
 完善中

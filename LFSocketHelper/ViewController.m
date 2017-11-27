@@ -25,8 +25,8 @@
     
     
     LFSocketConfig *config = [[LFSocketConfig alloc] init];
-    config.host = @"192.168.1.229";
-    config.port = 20066;
+    config.host = your ip;
+    config.port = your port;
 
     LFIMClient *im = [LFIMClient shareInstance];
     im.dataType = LFSocketReadDataTypeData;

@@ -120,17 +120,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AB21A3F51FCBBF8200601491 /* GCD */ = {
-			isa = PBXGroup;
-			children = (
-				AB21A3F61FCBBF8200601491 /* GCDAsyncSocket.h */,
-				AB21A3F71FCBBF8200601491 /* GCDAsyncSocket.m */,
-				AB21A3F81FCBBF8200601491 /* GCDAsyncUdpSocket.h */,
-				AB21A3F91FCBBF8200601491 /* GCDAsyncUdpSocket.m */,
-			);
-			path = GCD;
-			sourceTree = "<group>";
-		};
 		ABC1A9781FC7FA7600BA4865 = {
 			isa = PBXGroup;
 			children = (
@@ -191,7 +180,10 @@
 		ABC1A9B61FC7FBF600BA4865 /* LFSocketHelper */ = {
 			isa = PBXGroup;
 			children = (
-				AB21A3F51FCBBF8200601491 /* GCD */,
+				AB21A3F61FCBBF8200601491 /* GCDAsyncSocket.h */,
+				AB21A3F71FCBBF8200601491 /* GCDAsyncSocket.m */,
+				AB21A3F81FCBBF8200601491 /* GCDAsyncUdpSocket.h */,
+				AB21A3F91FCBBF8200601491 /* GCDAsyncUdpSocket.m */,
 				ABC1A9B71FC7FC3A00BA4865 /* LFIMClient.h */,
 				ABC1A9B81FC7FC3A00BA4865 /* LFIMClient.m */,
 				ABC1A9C21FC8222F00BA4865 /* LFSocketConfig.h */,

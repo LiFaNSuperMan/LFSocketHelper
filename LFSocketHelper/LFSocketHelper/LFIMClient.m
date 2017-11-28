@@ -8,7 +8,7 @@
 
 #import "LFIMClient.h"
 #import "LFSendMsgHelper.h"
-#import "NSString+GetFullString.h"
+#import "LFSocketDataDeCoder.h"
 
 @interface LFIMClient()<GCDAsyncSocketDelegate>
 
@@ -141,6 +141,7 @@
 // 得到服务器发送的消息
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
 
+    NSLog(@"---%@",data);
     [self configData:data];
     self.lastInteval=[[NSDate date] timeIntervalSince1970];
     [sock readDataWithTimeout:-1 tag:0];
@@ -152,19 +153,29 @@
     switch (self.dataType) {
         case LFSocketReadDataTypeData:
             {
-                if ([self.delegate respondsToSelector:@selector(LFSocketReadData:DataType:)]) {
-                    [self.delegate LFSocketReadData:data DataType:LFSocketReadDataTypeData];
-                }
+                [[LFSocketDataDeCoder shareInstance] getFullDataArrayWithData:data complete:^(id data) {
+                    NSArray *array = (NSArray *)data;
+                    if (array.count == 0 || array == nil) {
+                        return;
+                    }
+                    if ([self.delegate respondsToSelector:@selector(LFSocketReadData:DataType:)]) {
+                        [self.delegate LFSocketReadData:array DataType:LFSocketReadDataTypeData];
+                    }
+                }];
             }
             break;
         case LFSocketReadDataTypeString:
-        {
-            NSString* aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSArray *dataArray = [aStr toArrayOrNSDictionary];
-            if ([self.delegate respondsToSelector:@selector(LFSocketReadData:DataType:)]) {
-                [self.delegate LFSocketReadData:dataArray DataType:LFSocketReadDataTypeString];
+            {
+               [[LFSocketDataDeCoder shareInstance] getFullStringArrayWithData:data complete:^(id data) {
+                   NSArray *array = (NSArray *)data;
+                   if (array.count == 0 || array == nil) {
+                       return;
+                   }
+                   if ([self.delegate respondsToSelector:@selector(LFSocketReadData:DataType:)]) {
+                       [self.delegate LFSocketReadData:array DataType:LFSocketReadDataTypeData];
+                   }
+                }];
             }
-        }
             break;
         default:
             break;

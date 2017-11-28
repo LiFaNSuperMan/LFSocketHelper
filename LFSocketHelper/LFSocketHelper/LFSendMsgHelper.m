@@ -9,9 +9,6 @@
 #import "LFSendMsgHelper.h"
 #import "AppDelegate.h"
 
-#import "LFSocketDataDeCode.h"
-
-
 @implementation LFSendMsgHelper
 
 #pragma mark - publicAction

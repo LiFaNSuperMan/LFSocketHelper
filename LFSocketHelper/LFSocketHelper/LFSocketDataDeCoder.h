@@ -41,12 +41,24 @@
 
 @end
 
-@interface LFSocketDataDeCode : NSObject
+@interface LFSocketDataDeCoder : NSObject
 
 + (instancetype)shareInstance;
 
+/**
+  字节流解码 返回的是处理好的socketdetailinfo数据（数组形式）  可自行修改
 
-- (id)getFullArrayWithData:(NSData *)data;
+ @param data socket返回的未处理数据
+ @param complete 返回block
+ */
+- (void)getFullDataArrayWithData:(NSData *)data complete:(void(^)(id data))complete;
+/**
+ 字符流解码 返回的是处理好的string数据（数组形式）可自行修改
+
+ @param data socket返回的未处理数据
+ @return 处理好的数组或者未处理好的空数组
+ */
+- (void)getFullStringArrayWithData:(NSData *)data complete:(void(^)(id data))complete;
 @end
 
 
